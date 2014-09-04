@@ -4,8 +4,6 @@
 
 clear all
 close all
-addpath('../toollp');
-
 
 nbiter=1;
 ratio=0.5;
@@ -48,7 +46,14 @@ options.seuilitermax=10;           % value, for iterations lower than this one
 
 options.miniter=0;                 % minimal number of iterations 
 options.verbosesvm=0;              % verbosity of inner svm algorithm 
-options.efficientkernel=1;         % use efficient storage of kernels 
+
+%
+% Note: set 1 would raise the `strrep`
+%       error in vectorize.dll
+%       and this error is not able to fix
+%       because of the missing .h libraay files
+% Modify: MaxisKao @ Sep. 4 2014
+options.efficientkernel=0;         % use efficient storage of kernels 
 
 
 %------------------------------------------------------------------------
@@ -57,8 +62,6 @@ options.efficientkernel=1;         % use efficient storage of kernels
 kernelt={'gaussian' 'gaussian' 'poly' 'poly' };
 kerneloptionvect={[0.5 1 2 5 7 10 12 15 17 20] [0.5 1 2 5 7 10 12 15 17 20] [1 2 3] [1 2 3]};
 variablevec={'all' 'single' 'all' 'single'};
-
-
 
 
 classcode=[1 -1];
